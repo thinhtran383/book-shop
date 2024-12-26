@@ -24,6 +24,7 @@ jobs:
       - name: Deploy to EC2
         run: |
           ssh -o StrictHostKeyChecking=no -i thinhubuntu.pem ubuntu@${{ secrets.EC2_IP }} << 'EOF'
+            export PATH=$PATH:/home/ubuntu/.nvm/versions/node/v18.20.5/bin/yarn
             cd /home/ubuntu/practice-react
           
             git pull origin master
@@ -31,9 +32,7 @@ jobs:
             yarn install
             yarn build
           
-            sudo rm -rf /var/www/vhosts/frontend/
-          
+            sudo rm -rf /var/www/vhosts/frontend/*
             sudo cp -R dist /var/www/vhosts/frontend/
-          
             sudo systemctl restart nginx
           EOF
