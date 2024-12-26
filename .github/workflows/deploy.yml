@@ -24,12 +24,19 @@ jobs:
       - name: Deploy to EC2
         run: |
           ssh -o StrictHostKeyChecking=no -i thinhubuntu.pem ubuntu@${{ secrets.EC2_IP }} << 'EOF'
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+          [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+          
+          # Ensure Yarn is available
+          export PATH=$PATH:$HOME/.nvm/versions/node/v18.20.5/bin/
+          
             cd /home/ubuntu/practice-react
           
             git pull origin master
           
-            npm install
-            npm run build
+            yarn install
+            yarn build
           
             sudo rm -rf /var/www/vhosts/frontend/*
             sudo cp -R dist /var/www/vhosts/frontend/
