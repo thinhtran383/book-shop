@@ -1,20 +1,28 @@
-import React, {useState} from "react";
-import {Button, TextField, Box} from "@mui/material";
-import TodoItem from "./component/TodoItem";
+import React, { useState } from 'react';
+import { Button, TextField, Box } from '@mui/material';
+import TodoItem from '../../component/TodoItem.tsx';
 
 const HomePage: React.FC = () => {
-    const [tasks, setTasks] = useState<string[]>([]);
-    const [taskInput, setTaskInput] = useState<string>("");
+    const tasksName = [
+        'Học lập trình React',
+        'Học lập trình NodeJS',
+        'Học lập trình TypeScript',
+    ];
+
+    const [tasks, setTasks] = useState<string[]>(tasksName);
+    const [taskInput, setTaskInput] = useState<string>('');
 
     const handleAddTask = () => {
-        if (taskInput.trim() !== "") {
+        if (taskInput.trim() !== '') {
             setTasks((prevTasks) => [...prevTasks, taskInput.trim()]);
-            setTaskInput("");
+            setTaskInput('');
         }
     };
 
     const handleRemoveTask = (indexToRemove: number) => {
-        setTasks((prevTasks) => prevTasks.filter((_, index) => index !== indexToRemove));
+        setTasks((prevTasks) =>
+            prevTasks.filter((_, index) => index !== indexToRemove)
+        );
     };
 
     return (
@@ -26,14 +34,14 @@ const HomePage: React.FC = () => {
                     placeholder="Thêm công việc"
                     value={taskInput}
                     onChange={(e) => setTaskInput(e.target.value)}
-                    sx={{flex: 1}}
+                    sx={{ flex: 1 }}
                 />
                 <Button
                     variant="contained"
                     color="primary"
                     size="large"
                     sx={{
-                        height: "56px",
+                        height: '56px',
                     }}
                     onClick={handleAddTask}
                 >
@@ -43,13 +51,14 @@ const HomePage: React.FC = () => {
 
             <Box
                 sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "8px",
-                    alignItems: "stretch",
-                    width: "100%",
-                    marginTop: "16px",
-                }}>
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '8px',
+                    alignItems: 'stretch',
+                    width: '100%',
+                    marginTop: '16px',
+                }}
+            >
                 {tasks.map((task, index) => (
                     <TodoItem
                         key={index}
