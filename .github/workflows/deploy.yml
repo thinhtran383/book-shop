@@ -20,6 +20,16 @@ jobs:
           echo "${{ secrets.EC2_SSH_KEY }}" > thinhubuntu.pem
           chmod 600 thinhubuntu.pem
 
+      - name: Check commit message for '-d'
+        id: commit-check
+        run: |
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          echo "Commit message: $COMMIT_MESSAGE"
+          if [[ "$COMMIT_MESSAGE" != *"-d"* ]]; then
+            echo "Commit does not contain '-d'. Skipping deploy."
+            exit 0
+          fi
+
       # Copy SSH private key file to GitHub Actions runner
       - name: Deploy to EC2
         run: |
