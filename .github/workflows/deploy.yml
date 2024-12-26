@@ -24,13 +24,12 @@ jobs:
       - name: Deploy to EC2
         run: |
           ssh -o StrictHostKeyChecking=no -i thinhubuntu.pem ubuntu@${{ secrets.EC2_IP }} << 'EOF'
-            export PATH=$PATH:/home/ubuntu/.nvm/versions/node/v18.20.5/bin/yarn
             cd /home/ubuntu/practice-react
           
             git pull origin master
           
-            yarn install
-            yarn build
+            npm install
+            npm run build
           
             sudo rm -rf /var/www/vhosts/frontend/*
             sudo cp -R dist /var/www/vhosts/frontend/
