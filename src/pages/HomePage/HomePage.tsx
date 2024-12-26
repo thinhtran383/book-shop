@@ -35,6 +35,9 @@ const HomePage: React.FC = () => {
                     value={taskInput}
                     onChange={(e) => setTaskInput(e.target.value)}
                     sx={{ flex: 1 }}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') handleAddTask();
+                    }}
                 />
                 <Button
                     variant="contained"
