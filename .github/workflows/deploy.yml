@@ -31,9 +31,9 @@ jobs:
             yarn install
             yarn build
           
-            sudo rm -rf /var/www/vhosts/frontend/*
+            sudo rm -rf /var/www/vhosts/frontend/
           
-            sudo cp -R dist/* /var/www/vhosts/frontend/
+            sudo cp -R dist /var/www/vhosts/frontend/
           
             sudo systemctl restart nginx
           EOF
