@@ -26,7 +26,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i thinhubuntu.pem ubuntu@${{ secrets.EC2_IP }} << 'EOF'
             cd /home/ubuntu/practice-react
           
-            git pull origin main
+            git pull origin master
           
             yarn install
             yarn build
