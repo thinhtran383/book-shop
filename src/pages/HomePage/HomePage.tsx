@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, TextField, Box } from '@mui/material';
 import TodoItem from '../../component/TodoItem.tsx';
+import Header from '../../component/Header/Header.tsx';
 
 const HomePage: React.FC = () => {
     const tasksName = [
@@ -27,6 +28,7 @@ const HomePage: React.FC = () => {
 
     return (
         <>
+            <Header />
             <h1>Danh sách công việc cần làm</h1>
             <Box display="flex" alignItems="center" gap={2} width="100%">
                 <TextField
